@@ -3,7 +3,7 @@ import { Switch } from "@nextui-org/react";
 import Brightness3Icon from '@mui/icons-material/Brightness3';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { Link } from "react-router-dom";
-import Search from './search';
+import Search from '../Google component/search';
 
 function Navbar() {
   const { theme, setTheme } = useTheme('light');

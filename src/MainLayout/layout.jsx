@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import Navbar from '../Google component/navbar';
+import Navbar from '../Maincom/navbar';
 
 const mainlayout =()=>{
 

@@ -70,3 +70,76 @@
 
 /* In your global styles or Tailwind CSS file */
 
+.card-container {
+  perspective: 1000px;
+}
+
+.card {
+  width: 128px;
+  height: 128px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s;
+  cursor: pointer;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+}
+
+.card .Front {
+  transform: rotateY(0deg);
+}
+
+.card .Back {
+  transform: rotateY(180deg);
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+.text-gradient {
+  background: linear-gradient(16deg, #4B90FF, #FF5546);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.loader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loader hr {
+  border-radius: 4px;
+  border: none;
+  background-color: #F6F7F8;
+  background: linear-gradient(to right, #9ED7FF, #FFFFFF, #9ED7FF);
+  background-size: 800px 50px;
+  height: 20px;
+  animation: loader 3s infinite linear;
+}
+
+@keyframes loader {
+  0% {
+    background-position: -800px 0px;
+  }
+  100% {
+    background-position: 800px 0px;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -2,16 +2,19 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } 
 import MainLayout from './MainLayout/layout';
 import Results from './Google component/result';
 import Err from './Maincom/Err';
+import Home from './Maincom/Home';
+import Games from './Game/Game';
+import Ai from './Ai/Ai';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Results />} />
+        <Route index element={<Home />} />
         <Route path="search" element={<Results />} />
         <Route path="images" element={<Results />} />
-        <Route path="news" element={<Results />} />
-        <Route path="videos" element={<Results />} />
+        <Route path= "Ai"  element={<Ai/>}/>
+        <Route path= "Games"  element={<Games/>}/>
         <Route path="*" element={<Err />} />
       </Route>
       </>
