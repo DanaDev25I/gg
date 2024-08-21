@@ -7,12 +7,13 @@ const Main = () => {
   const [input, setInput] = useState('');
   const { resultData,newChat,  loading, setLoading, showResults, setShowResults, onSent } = useStateContext();
 
-  const handleSend = async () => {
+  const handleSendMessage = async () => {
     setLoading(true);
     await onSent(input);
     setLoading(false);
     setShowResults(true);
-    
+    setInput('');
+
     gsap.fromTo(".result", { opacity: 0 }, { opacity: 1, duration: 1 });
   };
 
@@ -32,17 +33,12 @@ const Main = () => {
               <p className="text-xl mt-4">How can I help you today?</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[...Array(4)].map((_, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-200 relative">
-                  <p className="text-gray-600 text-lg">Suggest beautiful places to see on upcoming road trip</p>
-                </div>
-              ))}
+              
             </div>
           </>
         ) : (
           <div className="p-4 max-h-70vh overflow-y-auto">
             <div className="flex items-center gap-4 mb-8">
-              {/* Additional content can be added here */}
             </div>
             <div>
               {loading ? (
@@ -68,7 +64,7 @@ const Main = () => {
           <div className="flex items-center gap-4">
             {input && (
               <Button
-                onClick={handleSend}
+                onClick={handleSendMessage}
                 className="w-6 cursor-pointer"
               >Search</Button>
             )}

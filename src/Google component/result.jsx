@@ -6,7 +6,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useTheme } from 'next-themes';
-
+import Search from './search';
 import All from './tabs/All';
 import ImagesTab from './tabs/Images';
 
@@ -25,6 +25,9 @@ export const Results = () => {
 
   return (
     <div className="mt-4">
+         <div className="w-full flex items-center justify-center sm:max-w-md sm:mx-auto mt-4 sm:mt-0">
+          <Search />
+        </div>
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

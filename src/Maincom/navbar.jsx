@@ -1,53 +1,99 @@
-import { useTheme } from "next-themes";
-import { Switch } from "@nextui-org/react";
-import Brightness3Icon from '@mui/icons-material/Brightness3';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import { Link } from "react-router-dom";
-import Search from '../Google component/search';
+import * as React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Menu as MenuIcon, Close } from '@mui/icons-material';
+import { Button } from '@/components/ui/button';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+} from '@/components/ui/drawer';
 
-function Navbar() {
-  const { theme, setTheme } = useTheme('light');
+const Url = [
+  { Text: "Home", url: "/" },
+  { Text: "Games", url: "/Games" },
+  { Text: "AI", url: "/Ai" },
+  { Text: "Search", url: "/search" },
+];
 
-  const handleThemeChange = (isSelected) => {
-    setTheme(isSelected ? 'dark' : 'light');
-  };
+export function Navbar() {
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+  const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 
   return (
-    <header className="bg-white dark:bg-gray-900 ">
-      <nav className="container mx-auto flex flex-col sm:flex-row items-center justify-between p-4">
-        <div className="flex items-center justify-between w-full sm:w-auto">
-          <Link to='/'>
-           <h1 className="text-4xl italic font-bold">DANA</h1>
-          </Link>
+    <header className="bg-white dark:bg-gray-900 shadow-md">
+      <nav className="container mx-auto flex items-center justify-between p-4">
+        <Link to="/" className="flex-shrink-0">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
+            DANA
+          </h1>
+        </Link>
 
-          <div className="flex items-center gap-4 sm:hidden">
-            <Switch
-              defaultSelected={theme === 'dark'}
-              size="lg"
-              color="secondary"
-              startContent={<LightModeIcon />}
-              endContent={<Brightness3Icon />}
-              onChange={(e) => handleThemeChange(e.target.checked)}
-              className="ml-4"
-            />
-          </div>
+        {/* Desktop Navigation Links */}
+        <div className="hidden md:flex space-x-8">
+          {Url.map(({ Text, url }) => (
+            <NavLink
+              key={url}
+              to={url}
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            >
+              {Text}
+            </NavLink>
+          ))}
         </div>
 
-        <div className="w-full flex items-center justify-center sm:max-w-md sm:mx-auto mt-4 sm:mt-0">
-          <Search />
-        </div>
+        {/* Mobile Menu Button */}
+        <Button
+          onClick={toggleDrawer}
+          className="md:hidden text-gray-800 dark:text-gray-200"
+          aria-expanded={drawerOpen}
+          aria-label="Toggle menu"
+        >
+          {drawerOpen ? (
+            <Close className="h-6 w-6" />
+          ) : (
+            <MenuIcon className="h-6 w-6" />
+          )}
+        </Button>
 
-        <div className="hidden sm:flex items-center">
-          <Switch
-            defaultSelected={theme === 'dark'}
-            size="lg"
-            color="secondary"
-            startContent={<LightModeIcon />}
-            endContent={<Brightness3Icon />}
-            onChange={(e) => handleThemeChange(e.target.checked)}
-            className="ml-4"
-          />
-        </div>
+        {/* Mobile Drawer Menu */}
+        <Drawer
+          open={drawerOpen}
+          onOpenChange={setDrawerOpen}
+          placement="right"
+        >
+          <DrawerContent
+            className="transition-transform transform-gpu"
+            style={{
+              transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
+              transition: 'transform 0.3s ease-in-out',
+            }}
+          >
+            <div className="mx-auto w-full max-w-sm">
+              <DrawerHeader>
+                <DrawerTitle>Menu</DrawerTitle>
+                <DrawerDescription>Navigate to different sections.</DrawerDescription>
+              </DrawerHeader>
+              <div className="flex  flex-col pl-8 space-y-4">
+                {Url.map(({ Text, url }) => (
+                  <Link
+                    key={url}
+                    to={url}
+                    className="text-xl font-semibold hover:text-gray-600 dark:hover:text-gray-400"
+                    onClick={toggleDrawer}
+                  >
+                    {Text}
+                  </Link>
+                ))}
+              </div>
+              <div className="flex justify-between p-4">
+                <Button onClick={toggleDrawer}>Close</Button>
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
       </nav>
     </header>
   );

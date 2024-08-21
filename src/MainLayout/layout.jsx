@@ -1,16 +1,15 @@
 import { Outlet } from 'react-router-dom';
+import Navbar from '../Maincom/Navbar'; // Ensure the import path matches your file structure
 
-import Navbar from '../Maincom/navbar';
+const MainLayout = () => {
+  return (
+    <div>
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
-const mainlayout =()=>{
-
-
-    return (
-        <>
-          <Navbar />
-            <Outlet />
-            
-        </> 
-    )
-}
-export default mainlayout;
+export default MainLayout;

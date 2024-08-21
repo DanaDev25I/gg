@@ -6,7 +6,7 @@ import { useStateContext } from '../store/usecontext';
 
 function SearchComponent() {
   const { setSearchTerm } = useStateContext(); // Accessing context here
-  const [search, setSearch] = useState("Real madrid"); 
+  const [search, setSearch] = useState(""); 
   const [debouncedValue] = useDebounce(search, 300); 
 
   useEffect(() => {

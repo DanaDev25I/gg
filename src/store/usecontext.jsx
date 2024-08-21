@@ -8,7 +8,7 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState([]);
-  const [AiInput, setAiInput] = useState('');
+  
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState('');
@@ -47,10 +47,10 @@ export const StateContextProvider = ({ children }) => {
     setResultData("");
     setLoading(true);
     setShowResults(true);
-    setAiInput("")
+   
     
     try {
-      const response = await run(prompt || AiInput);
+      const response = await run(prompt);
       let responseArray = response.split("**");
       let newResponse = "";
       
@@ -68,19 +68,19 @@ export const StateContextProvider = ({ children }) => {
       console.error("Error while running chat:", error);
     } finally {
       setLoading(false);
-      setAiInput("");
+     
     }
   };
 
   const newChat = () => {
     setLoading(false);
     setShowResults(false);
-    setAiInput("")
+  
   };
 
   return (
     <StateContext.Provider value={{ 
-      searchTerm, setSearchTerm, data, setData, AiInput, setAiInput, 
+      searchTerm, setSearchTerm, data, setData, 
       showResults, setShowResults, loading, setLoading, 
       resultData, setResultData, onSent, newChat 
     }}>

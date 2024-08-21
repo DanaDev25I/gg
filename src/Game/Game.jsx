@@ -61,19 +61,19 @@ function Card() {
   }, []);
 
   return (
-    <main className={`flex shadow-lg flex-col items-center h-screen p-6 text-3xl font-bold ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'} transition-colors duration-300`}>
+    <main className={`flex flex-col items-center h-screen p-4 md:p-6 text-lg md:text-3xl font-bold ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'} transition-colors duration-300`}>
       <div className="mb-4">
         <Button auto onClick={shuffleCards} color="primary" className="bg-gray-200 text-gray-900 hover:bg-gray-300">
           New Game
         </Button>
       </div>
       <div className="text-xl mb-4 flex items-center">
-        <img className='h-12 translate-y-[-9px] w-12' alt="Coin" src="/img/—Pngtree—glossy golden coin icon_5986301.png" />
-        <span className="ml-2">{coins}</span>
+        <img className='h-8 w-8 md:h-12 md:w-12' alt="Coin" src="/img/—Pngtree—glossy golden coin icon_5986301.png" />
+        <span className="ml-2 text-base md:text-xl">{coins}</span>
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {cards.map((card) => (
-          <div key={card.id} className="flex items-center justify-center card-container">
+          <div key={card.id} className="flex items-center justify-center">
             <div 
               className={`card ${card.matched || card === firstCard || card === secondCard ? 'flipped' : ''}`} 
               onClick={() => !card.matched && card !== firstCard && card !== secondCard && handleChoice(card)}
