@@ -6,7 +6,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useTheme } from 'next-themes';
-import Search from './Search';  // Ensure the correct import path
+import Search from './search';  // Ensure the correct import path
 import All from './tabs/All';
 import ImagesTab from './tabs/Images';
 import Footer from './Footer';
