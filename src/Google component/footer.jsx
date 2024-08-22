@@ -1,7 +1,7 @@
 const Footer = () => (
   <>
-  <hr/>
-  <footer className=" mt-5 flex flex-col gap-3" >
+  <hr className="mt-4"/>
+  <footer className=" mt-0 flex flex-col gap-3" >
     
     <span className="text-sm p-4 text-gray-500 sm:text-center dark:text-gray-400">
       © 2024 <a href="https://github.com/Danadev25" className="hover:underline">Dana™</a>. All Rights Reserved.

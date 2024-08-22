@@ -15,6 +15,7 @@ const Url = [
   { Text: "Games", url: "/Games" },
   { Text: "AI", url: "/Ai" },
   { Text: "Search", url: "/search" },
+  { Text: "Movies", url: "/Movies" },
 ];
 
 export function Navbar() {

@@ -6,13 +6,13 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useTheme } from 'next-themes';
-import Search from './search';
+import Search from './Search';  // Ensure the correct import path
 import All from './tabs/All';
 import ImagesTab from './tabs/Images';
-
+import Footer from './Footer';
 const links = [
-  { url: '/search', text: 'All', component: <All /> },
-  { url: '/images', text: 'Images', component: <ImagesTab /> },
+  { text: 'All', component: <All /> },
+  { text: 'Images', component: <ImagesTab /> },
 ];
 
 export const Results = () => {
@@ -24,41 +24,48 @@ export const Results = () => {
   };
 
   return (
-    <div className="mt-4">
-         <div className="w-full flex items-center justify-center sm:max-w-md sm:mx-auto mt-4 sm:mt-0">
-          <Search />
-        </div>
+    <div className="mt-4 px-4 sm:px-0">
+      {/* Search Component */}
+      <div className="w-full flex items-center justify-center sm:max-w-md mx-auto mb-4">
+        <Search />
+      </div>
+      
+      {/* Tabs Component */}
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="tabs">
-              {links.map(({ url, text }, index) => (
+            <TabList onChange={handleChange} aria-label="tabs" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+              {links.map(({ text }, index) => (
                 <Tab
-                  key={url}
+                  key={text}
                   label={text}
                   value={(index + 1).toString()}
                   component={NavLink}
-                  to={url}
                   sx={{
-                    fontSize:'20px',
+                    fontSize: '16px',
                     textTransform: 'none',
                     fontWeight: value === (index + 1).toString() ? 'bold' : 'normal',
                     color: theme === 'dark' ? 'white' : 'text.primary',
+                    '&.Mui-selected': {
+                      color: theme === 'dark' ? 'gray' : 'blue',
+                    },
                     '&:hover': {
                       color: theme === 'dark' ? 'gray' : 'blue',
                     },
+                    padding: '12px 16px', // Adjust padding for better touch targets
                   }}
                 />
               ))}
             </TabList>
           </Box>
-          {links.map(({ component, url }, index) => (
-            <TabPanel key={url} value={(index + 1).toString()}>
+          {links.map(({ component }, index) => (
+            <TabPanel key={index} value={(index + 1).toString()} sx={{ padding: 0 }}>
               {component}
             </TabPanel>
           ))}
         </TabContext>
       </Box>
+      <Footer/>
     </div>
   );
 };
